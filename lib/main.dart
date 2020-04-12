@@ -5,13 +5,26 @@ void main() => runApp(
         home: Homepage(),
     )
 );
+enum AuthMode { LOGIN, SIGNUP }
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
+  @override
+  // ignore: missing_return
+  _HomepageState createState() => _HomepageState();
+
+  }
+
+
+class _HomepageState extends State<Homepage> {
+  AuthMode _authMode = AuthMode.LOGIN;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
         body: Container(
+
 
             padding: EdgeInsets.symmetric(vertical:30),
             width: double.infinity,
@@ -28,10 +41,13 @@ class Homepage extends StatelessWidget {
           child: Column(
 
                 children: <Widget>[
+
                   new Image.asset('assets/images/bg.png'),
                         SizedBox(height: 80,),
+                    
                     Padding(
                         padding: EdgeInsets.all(20),
+
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -105,13 +121,24 @@ class Homepage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.orange[900]
                             ),
-                            child: Center(
-                              child: Text("Login", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                            child: (FlatButton(child: Text("Login", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                              
+                                onPressed: () {})
+
                             ),
                         ),
+                          FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                _authMode = AuthMode.SIGNUP;
+                              });
+                            }, child:
+                          Text('Create Account'),),
                                       SizedBox(height: 30,),
-                                      Text("Not account yet? SIGN UP ", style: TextStyle(color: Colors.grey),),
+                                      Text("No account yet? SIGN UP ", style: TextStyle(color: Colors.grey),),
                                       SizedBox(height: 30,),
+                                      
+                                      
 
 
                                       Row(
@@ -142,8 +169,10 @@ class Homepage extends StatelessWidget {
                                                   child: Text("Github", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                                                 ),
                                       )
+                                                  
 
                                             )],
+                                        
                     ),
         ],
     ),
@@ -153,6 +182,8 @@ class Homepage extends StatelessWidget {
       ),
     )
     );
+  }
 
 }
-}
+
+
